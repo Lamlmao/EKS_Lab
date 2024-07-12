@@ -1,0 +1,2 @@
+1. Set up Infra for the Lab <Done>
+2. Create IAM Roles for Service Accounts to setup oidc 
