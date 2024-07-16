@@ -20,10 +20,10 @@ module "eks" {
   vpc_id     = data.terraform_remote_state.vpc_data.outputs.vpc[each.value.vpc_name].vpc_id
   subnet_ids = data.terraform_remote_state.private_subnets_data.outputs.private_subnets[each.value.vpc_name]
 
-  depends_on = [
-    aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
-    aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
-  ]
+  # depends_on = [
+  #   aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
+  #   aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
+  # ]
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -39,11 +39,11 @@ module "eks" {
       desired_size   = each.value.desired_size
       instance_types = each.value.instance_types
       capacity_type  = each.value.capacity_type
-      depends_on = [
-        aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
-        aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
-        aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
-      ]
+      # depends_on = [
+      #   aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
+      #   aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
+      #   aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
+      # ]
     }
   }
   tags = local.tags
